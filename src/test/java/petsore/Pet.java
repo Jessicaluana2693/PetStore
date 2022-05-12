@@ -37,5 +37,21 @@ public class Pet {
                 .body("tags.name", contains("cute")) // usado para quando o que vc quer esta num array dentro do json []
         ;
     }
+    @Test
+    public void consultarPet(){
+        String petId = "2026252730";
 
+        given()
+                .contentType("application/json")
+                .log().all()
+        .when()
+                .get(uri+"/"+petId)
+        .then()
+                .log().all()
+                .statusCode(200)
+                .body("name", is("Charlotte"))
+                .body("category.name", is("dog"))
+                .body("status", is("available"))
+        ;
+    }
 }
