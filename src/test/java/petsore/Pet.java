@@ -7,6 +7,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.contains;
 
 public class Pet {
     String uri = "https://petstore.swagger.io/v2/pet"; // endereço da entidade pet - add um novo pet
@@ -22,7 +24,7 @@ public class Pet {
         String jsonBody = lerJson("db/pet1.json"); // só muda o caminho e nome do arquivo json
         // configurando o Rest-assured no estilo Gherkin
         given()
-                .contentType("application/json") // comun em API REST
+                .contentType("application/json") // comun em API REST | antigas seria o ("text/xml")
                 .log().all()
                 .body(jsonBody)
         .when()
@@ -30,6 +32,9 @@ public class Pet {
         .then()
                 .log().all()
                 .statusCode(200)
+                .body("name", is("Charlotte"))
+                .body("category.name", is("dog")) // is é usado para quando vc tem a informação simples entre as {}
+                .body("tags.name", contains("cute")) // usado para quando o que vc quer esta num array dentro do json []
         ;
     }
 
