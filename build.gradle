@@ -1,0 +1,15 @@
+plugins {
+    id 'java'
+}
+
+group 'br.com.iterasys'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.testng:testng:7.1.0'
+    testImplementation 'io.rest-assured:rest-assured:4.4.0'
+}
