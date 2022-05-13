@@ -33,7 +33,7 @@ public class Pet {
                 .log().all()
                 .statusCode(200)
                 .body("name", is("Charlotte"))
-                .body("category.name", is("dog")) // is é usado para quando vc tem a informação simples entre as {}
+                .body("category.name", is("AJESTHK@&534K")) // is é usado para quando vc tem a informação simples entre as {}
                 .body("tags.name", contains("cute")) // usado para quando o que vc quer esta num array dentro do json []
         ;
     }
@@ -41,6 +41,7 @@ public class Pet {
     public void consultarPet(){
         String petId = "2026252730";
 
+        String token =
         given()
                 .contentType("application/json")
                 .log().all()
@@ -50,8 +51,11 @@ public class Pet {
                 .log().all()
                 .statusCode(200)
                 .body("name", is("Charlotte"))
-                .body("category.name", is("dog"))
+                .body("category.name", is("AJESTHK@&534K"))
                 .body("status", is("available"))
+        .extract()
+                .path("category.name")
         ;
+        System.out.println("Token: "+ token);
     }
 }
