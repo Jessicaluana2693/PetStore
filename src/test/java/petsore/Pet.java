@@ -75,4 +75,21 @@ public class Pet {
                 .body("status", is("unavailable"))
         ;
     }
+
+    @Test
+    public void excluirPet(){
+        String petId = "2026252730";
+
+        given()
+                .contentType("application/json")
+                .log().all()
+        .when()
+                .delete(uri + "/" + petId)
+        .then()
+                .log().all()
+                .statusCode(200) // resposta de conectividade
+                .body("code", is(200)) // resposta de sucesso do código
+                .body("message", is(petId))
+        ;
+    }
 }
